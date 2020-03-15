@@ -1,0 +1,42 @@
+<h1 class="text-center">Tip Calculator</h1>
+<form [formGroup]="form" (ngSubmit)="calculate ();" >
+
+    <!-- amount -->
+    <div class="form-group">
+        <label> Amount </label>
+        <input type="text" name="amount" class="form-control" formControlName="amount" required mask="9999990*.99"/>
+    </div>
+
+    <!-- number of people -->
+    <div class="form-group">
+        <label> Number of People </label>
+        <input type="text" name="numberOfPeople" class="form-control" formControlName="numberOfPeople" required mask="9999990" />
+    </div>
+
+    <!-- country -->
+    <div class="form-group">
+        <label> Country </label>
+        <select name="country" class="form-control" required formControlName="country">
+            <option *ngFor="let country of store.countries" [value]="country.name">
+                {{ country.name }}
+            </option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary"> Calculate </button>
+</form>
+
+<br />
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title"> Result </h5>
+        <p class="card-text">
+            Amount after tip: {{ amountAfterTip | mask: "9999999.99" }} {{ currency }}
+        </p>
+        <p class="card-text">
+            Amount after tip split between {{ this.form.get ('numberOfPeople').value }} people:
+            {{ splitAmountAfterTip | mask: "9999999.99" }} {{ currency }}
+        </p>
+    </div>
+</div>
