@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 import { TipsService } from '../services/tips.service';
 
@@ -17,9 +17,9 @@ export class HomeComponent implements OnInit {
   public form: FormGroup;
   public store = COUNTRIES_STORE;
   public countries: any[] = [];
-  public amountAfterTip: number = 0;
-  public splitAmountAfterTip: number = 0;
-  public currency: string = '';
+  public amountAfterTip = 0;
+  public splitAmountAfterTip = 0;
+  public currency = '';
 
   // CONSTRUCTOR
 
@@ -37,12 +37,11 @@ export class HomeComponent implements OnInit {
       country: [null],
     });
 
-    if (this.store.countries.length == 0) {
-      this.tipsService.getCountries ().subscribe (response => {
+    if (this.store.countries.length === 0) {
+        this.tipsService.getCountries ().subscribe (response => {
         this.store.setCountries (response);
-      })
+      });
     }
-    
   }
 
   // HELPER FUNCTIONS
@@ -53,14 +52,13 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    let country = this.form.get ('country').value;
-    let amount = this.form.get ('amount').value;
-    let numberOfPeople = this.form.get ('numberOfPeople').value;
+    const country = this.form.get ('country').value;
+    const amount = this.form.get ('amount').value;
+    const numberOfPeople = this.form.get ('numberOfPeople').value;
 
-    const COUNTRY = this.store.countries.find (country => country.name === country);
-    this.currency = COUNTRY ? COUNTRY.currencies[0].code : '';
-    this.amountAfterTip = amount * (1 + this.tipsService.getTipRates (country));
-    this.splitAmountAfterTip = this.amountAfterTip / numberOfPeople;
+    const COUNTRY = this.store.countries.find (c => c.name === country);
+    this.currency = (COUNTRY ? COUNTRY.currencies[0].code : '');
+    this.amountAfterTip = (amount * (1 + this.tipsService.getTipRates (country)));
+    this.splitAmountAfterTip = (this.amountAfterTip / numberOfPeople);
   }
-
 }

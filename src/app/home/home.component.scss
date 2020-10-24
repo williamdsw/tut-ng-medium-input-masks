@@ -1,0 +1,19 @@
+
+/* || overall form style */
+
+.form-group > label {
+    font-weight: bold;
+}
+
+.form-control,
+.form-control:focus,
+.form-control:active {
+    background-color: rgb(41, 41, 41);
+    color: aqua;
+    font-style: italic;
+}
+
+.card {
+    background-color: rgb(102, 102, 102);
+    color: rgb(251, 172, 172);
+}
