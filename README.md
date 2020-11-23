@@ -1,5 +1,7 @@
 # TutorialAngularMediumInputMasks
 
+Deployed at: https://williamdsw.github.io/tut-ng-medium-input-masks/
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.1.
 
 ## Development server
